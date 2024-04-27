@@ -43,26 +43,28 @@ async function run() {
       const id = req.params.id
       const query = { _id : new ObjectId(id)}
       const result = await artCollections.findOne(query);
-      res.send(result)
+      res.send(result);
       console.log(result);
     })
 
     // create data 
     app.post('/arts', async(req, res)=>{
         const newArts = req.body;
-        const result = await artCollections.insertOne(newArts)
-        res.send(result)
+        const result = await artCollections.insertOne(newArts);
+        res.send(result);
     })
 
+    // fot delete 
     app.delete(`/arts/:id`, async(req, res) => {
       const id = req.params.id;
       const query = { _id : new ObjectId(id)};
       const result = await artCollections.deleteOne(query);
-      res.send(result)
+      res.send(result);
       console.log(result);
     })
 
 
+    // fort update 
     app.put(`/arts/:id`, async(req, res)=>{
       const id = req.params.id;
       const filter = { _id : new ObjectId(id)};
