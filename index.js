@@ -44,6 +44,7 @@ async function run() {
       const query = { _id : new ObjectId(id)}
       const result = await artCollections.findOne(query);
       res.send(result)
+      console.log(result);
     })
 
     // create data 
