@@ -47,14 +47,14 @@ async function run() {
       console.log(result);
     })
 
-    // create data 
+    //for create data 
     app.post('/arts', async(req, res)=>{
         const newArts = req.body;
         const result = await artCollections.insertOne(newArts);
         res.send(result);
     })
 
-    // fot delete 
+    // fot delete data
     app.delete(`/arts/:id`, async(req, res) => {
       const id = req.params.id;
       const query = { _id : new ObjectId(id)};
@@ -64,7 +64,7 @@ async function run() {
     })
 
 
-    // fort update 
+    // for update data 
     app.put(`/arts/:id`, async(req, res)=>{
       const id = req.params.id;
       const filter = { _id : new ObjectId(id)};
@@ -88,18 +88,6 @@ async function run() {
     })
 
     
-
-
-
-
-
-
-
-
-
-
-
-
     // Connect the client to the server	(optional starting in v4.7)
     // await client.connect();
     // Send a ping to confirm a successful connection
@@ -111,9 +99,6 @@ async function run() {
   }
 }
 run().catch(console.dir);
-
-
-
 
 
 app.get('/',(req, res) => {
