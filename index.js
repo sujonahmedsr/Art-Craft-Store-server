@@ -51,7 +51,6 @@ async function run() {
         const newArts = req.body;
         const result = await artCollections.insertOne(newArts)
         res.send(result)
-        console.log(newArts, result);
     })
 
     
