@@ -8,7 +8,7 @@ const port = process.env.PORT || 5000;
 
 // middleware 
 
-app.use(cors())
+app.use(cors());
 app.use(express.json())
 
 
@@ -52,6 +52,37 @@ async function run() {
         const newArts = req.body;
         const result = await artCollections.insertOne(newArts)
         res.send(result)
+    })
+
+    app.delete(`/arts/:id`, async(req, res) => {
+      const id = req.params.id;
+      const query = { _id : new ObjectId(id)};
+      const result = await artCollections.deleteOne(query);
+      res.send(result)
+      console.log(result);
+    })
+
+
+    app.put(`/arts/:id`, async(req, res)=>{
+      const id = req.params.id;
+      const filter = { _id : new ObjectId(id)};
+      const options = { upsert: true };
+      const update = req.body;
+      const art = {
+        $set: {
+          image_url:update.image_url,
+          item_name:update.item_name,
+          subcategory_Name:update.subcategory_Name,
+          price:update.price,
+          rating:update.rating,
+          stockStatus:update.stockStatus,
+          description:update.description,
+          processing_time:update.processing_time,
+          customization:update.customization
+        }
+      }
+      const result =  await artCollections.updateOne(filter, art, options);
+      res.send(result)
     })
 
     
